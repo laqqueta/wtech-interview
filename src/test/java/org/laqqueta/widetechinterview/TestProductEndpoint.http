@@ -1,0 +1,42 @@
+### Create mew product test
+< {%
+    request.variables.set("test_insert", [ // test data
+        {"name": "Samsung X11", "type": "Phone", price: 4_250_000, quantity: 50},
+        {"name": "Java Effective", "type": "Book", price: 350_000, quantity: 125},
+        {"name": "Iphone 99 Pro", "type": "Phone", price: 6_350_000, quantity: 70},
+        {"name": "ROG Pro Max 11", "type": "Laptop", price: 7_500_000, quantity: 20},
+        {"name": "HP Monitor 512 Inch", "type": "Monitor", price: 10_350_000, quantity: 5}
+    ])
+%}
+
+POST http://localhost:8080/api/v1/products
+Content-Type: application/json
+
+{
+  "name": "{{$.test_insert..name}}",
+  "type": "{{$.test_insert..type}}",
+  "price": "{{$.test_insert..price}}",
+  "quantity": "{{$.test_insert..quantity}}"
+}
+
+### Edit product
+PUT http://localhost:8080/api/v1/products/1
+Content-Type: application/json
+
+{
+"price": "5000",
+"quantity": "20"
+}
+
+### Get Product By Id
+GET http://localhost:8080/api/v1/products/1
+Accept: application/json
+
+### Get product paging
+GET http://localhost:8080/api/v1/products?page=1&size=10
+Accept: application/json
+
+### Delete Product
+DELETE http://localhost:8080/api/v1/products/1
+Accept: application/json
+
