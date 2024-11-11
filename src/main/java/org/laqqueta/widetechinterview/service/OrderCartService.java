@@ -48,10 +48,7 @@ public class OrderCartService {
 
     public void placeOrder() {
         // TODO: ????
-        orderCartRepository.findAll()
-                .stream()
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Empty Order"));
+        if (orderCartRepository.findAll().isEmpty()) throw new RuntimeException("Empty Order");
 
         orderCartRepository.deleteAll();
     }
